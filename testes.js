@@ -43,6 +43,7 @@ btRemover.addEventListener('click', function(){
 
 btLimpar.addEventListener('click', function(){
     mainDiv.innerHTML = '';
+    listaObj = [];
     localStorage.clear();
 })
 
