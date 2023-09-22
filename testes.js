@@ -70,7 +70,8 @@ function criaListaObj(){
 
 function renderListaObj(){
     for(obj of listaObj){
-    let novaDiv = `<div>Nome: ${obj.nome}<br>
+    let novaDiv = `<div>${listaObj.indexOf(obj)+1}°ITEM<br>
+        Nome: ${obj.nome}<br>
         Quant: ${obj.quant}<br>
         Preço: R$${obj.preço}<br>
         <hr></div>`;
