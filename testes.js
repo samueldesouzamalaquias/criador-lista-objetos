@@ -69,15 +69,25 @@ function criaListaObj(){
 }
 
 function renderListaObj(){
-    for(obj of listaObj){
-    let novaDiv = `<div>${listaObj.indexOf(obj)+1}°ITEM<br>
-        Nome: ${obj.nome}<br>
-        Quant: ${obj.quant}<br>
-        Preço: R$${obj.preço}<br>
+    for(let i=0; i<listaObj.length; i++){
+    let novaDiv = `<div>${i+1}° ITEM - Nome: ${listaObj[i].nome}<br>
+        Quant: ${listaObj[i].quant}<br>
+        Preço: R$${listaObj[i].preço}<br>
+        <button style="background-color: yellow "onclick="
+          listaObj.splice(${i}, 1);
+          mainDiv.innerHTML = '';
+          renderListaObj();
+          saveListaObj();
+        ">remover</button>
         <hr></div>`;
     mainDiv.innerHTML += novaDiv;
     }
 }    
+
+function removeItem(index){
+    listaObj = listaObj.splice(index,1);
+    renderListaObj();
+}
 
 function saveListaObj(){
     localStorage.setItem('listaObj', JSON.stringify(listaObj));
