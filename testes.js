@@ -5,7 +5,6 @@ let inputQuant = document.querySelector('#inputQuant');
 let inputPreço = document.querySelector('#inputPreço');
 const btAdicionar = document.querySelector('#btAdicionar');
 const btLimpar = document.querySelector('#btLimpar');
-const btRemover = document.querySelector('#btRemover');
 let listaObj = [];
 
 //style
@@ -16,8 +15,6 @@ inputPreço.style.width = '80px';
 
 btAdicionar.style.backgroundColor = 'green';
 btAdicionar.style.color = 'white';
-
-btRemover.style.backgroundColor = 'yellow';
 
 btLimpar.style.backgroundColor = 'red';
 btLimpar.style.color = 'white';
@@ -30,16 +27,6 @@ btAdicionar.addEventListener('click',function(){
     renderListaObj();
     saveListaObj();
 });
-
-btRemover.addEventListener('click', function(){
-    listaObj = listaObj.filter(obj => obj.nome !== inputNome.value);
-    mainDiv.innerHTML = '';
-    renderListaObj();
-    saveListaObj();
-    inputNome.value = '';
-    inputQuant.value = '';
-    inputPreço.value = '';
-})
 
 btLimpar.addEventListener('click', function(){
     mainDiv.innerHTML = '';
