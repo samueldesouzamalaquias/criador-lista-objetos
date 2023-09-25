@@ -49,7 +49,13 @@ function criaListaObj(){
     let novoObj = {};
     novoObj.nome = inputNome.value;
     novoObj.quant = parseInt(inputQuant.value);
+    if(isNaN(novoObj.quant)){
+        novoObj.quant = 0;
+    }
     novoObj.preço = parseFloat(inputPreço.value);
+    if(isNaN(novoObj.preço)){
+        novoObj.preço = 0;
+    }
     novoObj.preçoTot = novoObj.quant * novoObj.preço;
     listaObj.push(novoObj);
     inputNome.value = '';
