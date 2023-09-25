@@ -47,7 +47,7 @@ renderListaObj();
 //funções
 function criaListaObj(){
     let novoObj = {};
-    novoObj.nome = inputNome.value;
+    novoObj.nome = inputNome.value.trim();
     novoObj.quant = parseInt(inputQuant.value);
     if(isNaN(novoObj.quant)){
         novoObj.quant = 0
@@ -77,15 +77,26 @@ function renderListaObj(){
         ">remover</button>
         
         <button onclick="
-        listaObj[${i}].nome = inputNome.value;
-        listaObj[${i}].preço = parseFloat(inputPreço.value);
-        if(isNaN(listaObj[${i}].preço)){
-            listaObj[${i}].preço = 0;
+        let previousNome = listaObj[${i}].nome;
+        let previousQuant = listaObj[${i}].quant;
+        let previousPreço = listaObj[${i}].preço;
+        
+        inputNome.value ? listaObj[${i}].nome = inputNome.value : listaObj[${i}].nome = previousNome
+        
+        if(inputPreço.value !== ''){
+            listaObj[${i}].preço = parseFloat(inputPreço.value);
+            if(isNaN(listaObj[${i}].preço)){
+                listaObj[${i}].preço = 0;
+            }
         }
-        listaObj[${i}].quant = parseInt(inputQuant.value);
-        if(isNaN(listaObj[${i}].quant)){
-            listaObj[${i}].quant = 0
+        
+        if(inputQuant.value !== ''){
+            listaObj[${i}].quant = parseInt(inputQuant.value);
+            if(isNaN(listaObj[${i}].quant)){
+                listaObj[${i}].quant = 0
+            }
         }
+        
         listaObj[${i}].preçoTot = listaObj[${i}].preço * listaObj[${i}].quant;
         updateTot();
         mainDiv.innerHTML = '';
@@ -93,6 +104,7 @@ function renderListaObj(){
         renderListaObj();
         saveListaObj();
         ">alterar</button>
+        
         <hr></div>`;
     mainDiv.innerHTML += novaDiv;
     }
