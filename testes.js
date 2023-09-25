@@ -50,24 +50,22 @@ function criaListaObj(){
     novoObj.nome = inputNome.value;
     novoObj.quant = parseInt(inputQuant.value);
     if(isNaN(novoObj.quant)){
-        novoObj.quant = 0;
+        novoObj.quant = 0
     }
     novoObj.preço = parseFloat(inputPreço.value);
     if(isNaN(novoObj.preço)){
-        novoObj.preço = 0;
+        novoObj.preço = 0
     }
     novoObj.preçoTot = novoObj.quant * novoObj.preço;
     listaObj.push(novoObj);
-    inputNome.value = '';
-    inputQuant.value = '';
-    inputPreço.value = '';
+    clearInput();
     mainDiv.innerHTML = '';
     return listaObj;
 }
 
 function renderListaObj(){
     for(let i=0; i<listaObj.length; i++){
-    let novaDiv = `<div>${i+1}° ITEM - Nome: ${listaObj[i].nome}<br>
+        let novaDiv = `<div>${i+1}° ITEM - Nome: ${listaObj[i].nome}<br>
         Quant: ${listaObj[i].quant}<br>
         Preço un: R$${listaObj[i].preço} - Preço tot: R$${listaObj[i].preçoTot}<br>
         <button style="background-color: yellow"onclick="
@@ -77,14 +75,27 @@ function renderListaObj(){
           renderListaObj();
           saveListaObj();
         ">remover</button>
+        
+        <button onclick="
+        listaObj[${i}].nome = inputNome.value;
+        listaObj[${i}].preço = parseFloat(inputPreço.value);
+        if(isNaN(listaObj[${i}].preço)){
+            listaObj[${i}].preço = 0;
+        }
+        listaObj[${i}].quant = parseInt(inputQuant.value);
+        if(isNaN(listaObj[${i}].quant)){
+            listaObj[${i}].quant = 0
+        }
+        listaObj[${i}].preçoTot = listaObj[${i}].preço * listaObj[${i}].quant;
+        updateTot();
+        mainDiv.innerHTML = '';
+        clearInput();
+        renderListaObj();
+        saveListaObj();
+        ">alterar</button>
         <hr></div>`;
     mainDiv.innerHTML += novaDiv;
     }
-}    
-
-function removeItem(index){
-    listaObj = listaObj.splice(index,1);
-    renderListaObj();
 }
 
 function updateTot(){
@@ -97,6 +108,12 @@ function updateTot(){
 
 function saveListaObj(){
     localStorage.setItem('listaObj', JSON.stringify(listaObj));
+}
+
+function clearInput(){
+    inputNome.value = '';
+    inputQuant.value = '';
+    inputPreço.value = '';
 }
 
 updateTot();
