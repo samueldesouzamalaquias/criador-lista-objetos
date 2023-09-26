@@ -9,10 +9,16 @@ const btLimpar = document.querySelector('#btLimpar');
 let listaObj = [];
 
 //style
+const buttons = document.querySelectorAll('button')
 document.querySelectorAll('input').forEach(input => input.style.marginBottom = '10px');
 document.querySelectorAll('button').forEach(button => button.style.marginBottom = '20px');
 inputQuant.style.width = '80px';
 inputPreço.style.width = '80px';
+buttons.forEach(function(button){
+    button.style.width = '90px'
+    button.style.height = '30px'
+    button.style.marginRight = '30px'
+})
 
 btAdicionar.style.backgroundColor = 'green';
 btAdicionar.style.color = 'white';
@@ -68,7 +74,7 @@ function renderListaObj(){
         let novaDiv = `<div>${i+1}° ITEM - Nome: ${listaObj[i].nome}<br>
         Quant: ${listaObj[i].quant}<br>
         Preço un: R$${listaObj[i].preço} - Preço tot: R$${listaObj[i].preçoTot}<br>
-        <button style="background-color: yellow"onclick="
+        <button style="background-color: yellow; margin-right: 40px;" onclick="
           listaObj.splice(${i}, 1);
           mainDiv.innerHTML = '';
           updateTot();
